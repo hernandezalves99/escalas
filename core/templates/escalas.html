@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Escalas</title>
+
+<style>
+
+    body {
+        background-color: rgb(165, 165, 165);
+        margin: 2px;
+    
+}
+
+    .container{
+        color: white;
+        max-width: 500px;
+        background-color:rgb(85, 85, 85);
+        border-radius: 8px;
+        padding: 20px;
+        margin: auto;
+}
+
+    h1 {
+        text-align: center;
+}
+  
+    p {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 30px;
+}
+
+</style>
+
+</head>
+
+<body>
+    
+    <div class="container"> 
+        <h1>Escalas dos Próximos Eventos</h1> 
+        {% if eventos %} 
+            {% for evento in eventos %} 
+                <div class="evento"> 
+                    <h2>{{ evento.titulo }} - {{ evento.data }}</h2> 
+                    <p><strong>Participantes e Funções:</strong></p> 
+     
+                    {% if evento.escalas.all %} 
+                        <ul> 
+                            {% for escala in evento.escalas.all %} 
+                                <li> 
+                                    {{ escala.participante.first_name }} 
+    {{ escala.participante.last_name }} - {{ escala.get_funcao_display  }} 
+                                </li> 
+                            {% endfor %} 
+                        </ul> 
+                    {% else %} 
+                        <p>Não há participantes escalados para este evento.</p> 
+                    {% endif %} 
+                    </div> 
+            {% endfor %} 
+        {% else %} 
+            <p>Não há eventos cadastrados no momento.</p> 
+        {% endif %} 
+     
+    </div>
+
+    </div>
+
+</body>
+
+
+</html>
